@@ -6,8 +6,11 @@ import com.svetikov.webkotlin.service.CommonService
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.util.LinkedMultiValueMap
+import org.springframework.util.MultiValueMap
 import org.springframework.web.bind.annotation.*
 import java.lang.IllegalArgumentException
+import java.net.http.HttpResponse
 
 @RestController
 @RequestMapping("/api/consumer")
@@ -21,6 +24,15 @@ class ConsumerController(@Qualifier("consumer_service") private val service: Com
     fun handleBadRequest(e: IllegalArgumentException): ResponseEntity<String> =
         ResponseEntity(e.message, HttpStatus.NOT_FOUND)
 
+    @RequestMapping(value = ["/settings"],method = [RequestMethod.OPTIONS])
+    fun setting():ResponseEntity<*> {
+       val headers = LinkedMultiValueMap<String, String>()
+        headers.add("Allow","GET,DELETE,POST")
+
+
+
+       return ResponseEntity("i'm ok",headers,HttpStatus.OK)
+    }
 
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
