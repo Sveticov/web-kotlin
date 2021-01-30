@@ -8,15 +8,14 @@ import org.springframework.stereotype.Repository
 import java.lang.IllegalArgumentException
 
 
-@Repository
-@Qualifier("consumer")
+@Repository("consumer")
 class ConsumerRepository : CommonRepository<Consumer, Long> {
 
     private val dataConsumerTest = mutableListOf(
-        Consumer(1, "f1", "s1", Address(1, "1@mail.com", "Norway")),
-        Consumer(2, "f2", "s2", Address(2, "2@mail.com", "Norway")),
-        Consumer(3, "f3", "s3", Address(3, "3@mail.com", "Sweden")),
-        Consumer(5, "f5", "s5", Address(5, "5@mail.com", "Sweden")),
+        Consumer(1, "f1", "s1",Address(1, "1@mail.com", "Norway"))
+//        Consumer(2, "f2", "s2"),// Address(2, "2@mail.com", "Norway")),
+//        Consumer(3, "f3", "s3"),// Address(3, "3@mail.com", "Sweden")),
+//        Consumer(5, "f5", "s5"// Address(5, "5@mail.com", "Sweden")),
     )
 
     override fun findAll(): Collection<Consumer> {
@@ -33,7 +32,7 @@ class ConsumerRepository : CommonRepository<Consumer, Long> {
     }
 
     override fun findByID(id: Long): Consumer {
-        return     dataConsumerTest.firstOrNull(){it.id == id}?:
+        return  dataConsumerTest.firstOrNull(){it.id == id}?:
         throw  NoSuchElementException("This id $id could be found")
 
 //        return dataConsumerTest

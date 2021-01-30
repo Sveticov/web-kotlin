@@ -1,0 +1,13 @@
+spring:
+    mvc:
+     dispatch-options-request: true
+    datasource:
+      url: jdbc:postgresql://localhost:5432/svetikov
+      username: postgres
+      password: fox
+    jpa:
+      generate-ddl: true
+
+server:
+  port: 8080
+

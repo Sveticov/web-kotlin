@@ -1,5 +1,8 @@
 package com.svetikov.webkotlin.service
 
+import com.svetikov.webkotlin.model.AllConsumer
+import com.svetikov.webkotlin.model.Consumer
+
 interface CommonService<T,E> {
     fun findAll():Collection<T>
 
@@ -8,4 +11,10 @@ interface CommonService<T,E> {
     fun findByID(id:E):T
 
     fun deleteByID(id:E):T
+
+    fun selectName(id:E):String
+
+    fun selectEmail(id: E): String
+
+    fun findAllConsumerAddress(): Collection<AllConsumer>
 }
