@@ -1,13 +1,11 @@
 package com.svetikov.webkotlin.service
 
 import com.svetikov.webkotlin.model.AllConsumer
+import com.svetikov.webkotlin.model.AllConsumerImpl
 import com.svetikov.webkotlin.model.Consumer
-import com.svetikov.webkotlin.repository.CommonRepository
 import com.svetikov.webkotlin.repository.ConsumerDBRepository
 import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.stereotype.Repository
 import org.springframework.stereotype.Service
-import java.util.*
 
 @Service
 @Qualifier("consumer_service")
@@ -39,8 +37,20 @@ class ConsumerService(@Qualifier("consumer_db_i") private val repository: Consum
     override fun selectEmail(id: Long): String =
         repository.findById(id).map { consumer -> consumer.address }.map { address -> address?.email }.get()
 
-    override fun findAllConsumerAddress(): Collection<AllConsumer> =
-        repository.findAllConsumerAddress()
+    override fun findAllConsumerAddress(): Collection<AllConsumerImpl> {
+        val all: Collection<AllConsumer> = repository.findAllConsumerAddress()
+
+        return all.map {
+            AllConsumerImpl(
+                it.id,
+                it.first_name,
+                it.second_name,
+                it.email,
+                it.country
+            )
+        } as MutableList<AllConsumerImpl>
+    }
+       
 
 
 }

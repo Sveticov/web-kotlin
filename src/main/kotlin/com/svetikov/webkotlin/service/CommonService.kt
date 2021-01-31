@@ -1,6 +1,7 @@
 package com.svetikov.webkotlin.service
 
 import com.svetikov.webkotlin.model.AllConsumer
+import com.svetikov.webkotlin.model.AllConsumerImpl
 import com.svetikov.webkotlin.model.Consumer
 
 interface CommonService<T,E> {
@@ -16,5 +17,5 @@ interface CommonService<T,E> {
 
     fun selectEmail(id: E): String
 
-    fun findAllConsumerAddress(): Collection<AllConsumer>
+    fun findAllConsumerAddress(): Collection<AllConsumerImpl>
 }

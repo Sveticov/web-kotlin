@@ -3,6 +3,7 @@ package com.svetikov.webkotlin.controller
 
 import com.svetikov.webkotlin.model.Address
 import com.svetikov.webkotlin.model.AllConsumer
+import com.svetikov.webkotlin.model.AllConsumerImpl
 import com.svetikov.webkotlin.model.Consumer
 import com.svetikov.webkotlin.service.CommonService
 import org.springframework.beans.factory.annotation.Qualifier
@@ -99,7 +100,7 @@ class ConsumerController(@Qualifier("consumer_service") private val service: Com
         service.save(consumer1)
     }
     @GetMapping("/full")
-    fun findAllConsumerAddress(): ResponseEntity< Collection<AllConsumer>> =
+    fun findAllConsumerAddress(): ResponseEntity< Collection<AllConsumerImpl>> =
         ResponseEntity(service.findAllConsumerAddress(),HttpStatus.OK)
 
 
