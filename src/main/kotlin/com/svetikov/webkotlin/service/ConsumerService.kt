@@ -1,10 +1,10 @@
 package com.svetikov.webkotlin.service
 
-import com.svetikov.webkotlin.model.AllConsumer
-import com.svetikov.webkotlin.model.AllConsumerImpl
-import com.svetikov.webkotlin.model.Consumer
+import com.svetikov.webkotlin.model.*
 import com.svetikov.webkotlin.repository.ConsumerDBRepository
 import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
@@ -50,7 +50,25 @@ class ConsumerService(@Qualifier("consumer_db_i") private val repository: Consum
             )
         } as MutableList<AllConsumerImpl>
     }
-       
+
+    override fun findAllConsumerAndProducts(): Collection<Consumer> {
+//        val consumer = mutableListOf<Consumer>()
+//        val products = mutableListOf<Products>()
+//
+//        for (c in repository.findAllConsumerAndProducts()) {
+//            if (c.consumer_id==c.id)
+//            products.add(Products(c.id_p,c.name_product,c.description_product))
+//
+//            consumer.add(Consumer(c.id,c.first_name,c.second_name,null,products))
+//        }
+//return consumer
+        return repository.findAllConsumerAndProducts().map {
+            Consumer(
+                it.id, it.first_name, it.second_name, null,
+                setOf(Products(it.id_p, it.name_product, it.description_product/*, emptySet()*/))
+            )
+        }.toList()
+    }
 
 
 }

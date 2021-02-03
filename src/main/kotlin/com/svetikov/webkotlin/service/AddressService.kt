@@ -1,9 +1,6 @@
 package com.svetikov.webkotlin.service
 
-import com.svetikov.webkotlin.model.Address
-import com.svetikov.webkotlin.model.AllConsumer
-import com.svetikov.webkotlin.model.AllConsumerImpl
-import com.svetikov.webkotlin.model.Consumer
+import com.svetikov.webkotlin.model.*
 import com.svetikov.webkotlin.repository.AddressDBRepository
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.data.jpa.repository.JpaRepository
@@ -34,6 +31,10 @@ class AddressService(@Qualifier("repository_address") private val repository:Add
         repository.findById(id).get().email
 
     override fun findAllConsumerAddress(): Collection<AllConsumerImpl> {
+        TODO("Not yet implemented")
+    }
+
+    override fun findAllConsumerAndProducts(): Collection<Consumer> {
         TODO("Not yet implemented")
     }
 

@@ -1,10 +1,7 @@
 package com.svetikov.webkotlin.controller
 
 
-import com.svetikov.webkotlin.model.Address
-import com.svetikov.webkotlin.model.AllConsumer
-import com.svetikov.webkotlin.model.AllConsumerImpl
-import com.svetikov.webkotlin.model.Consumer
+import com.svetikov.webkotlin.model.*
 import com.svetikov.webkotlin.service.CommonService
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.web.servlet.server.Session
@@ -95,8 +92,13 @@ class ConsumerController(@Qualifier("consumer_service") private val service: Com
 
     @GetMapping("/test")
     fun test(){
+        val products= mutableSetOf<Products>(
+            Products(1,"prod1","descr1"),
+            Products(2,"prod2","descr2"),
+            Products(3,"prod3","descr3"),
+        )
         val address1= Address(0,"first@gmail.com","Norway")
-        val consumer1=Consumer(0,"fname","sname",address1)
+        val consumer1=Consumer(0,"fname","sname",address1,products)
         service.save(consumer1)
     }
     @GetMapping("/full")
@@ -104,5 +106,8 @@ class ConsumerController(@Qualifier("consumer_service") private val service: Com
         ResponseEntity(service.findAllConsumerAddress(),HttpStatus.OK)
 
 
+    @GetMapping("/full/p")
+    fun findAllConsumerAndProducts():Collection<Consumer> =
+        service.findAllConsumerAndProducts()
 
 }
